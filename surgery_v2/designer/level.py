@@ -191,9 +191,9 @@ class BodyPart:
               f"Selected {num_wounds} wounds {[os.path.split(t)[1] for t in self.wound_files]}")
         self.wound_data = []
 
-        m_canvas = Image.new('L', (702, 510), color=9)  # Is Outside of the canvas
+        m_canvas = Image.new('L', (702, 510), color=10)  # Is Outside of the canvas
         drawer = ImageDraw.Draw(m_canvas)
-        drawer.polygon(self.polygons[idx], fill=8)  # Is skin and inside of canvas
+        drawer.polygon(self.polygons[idx], fill=9)  # Is skin and inside of canvas
         self.m_canvas_np = np.array(m_canvas)
 
         rmv_idx = []
@@ -312,7 +312,7 @@ class BodyPart:
             img[img >= THRESH] = 1
             for y in range(0, self.m_canvas_np.shape[0] - img.shape[0], 20):
                 for x in range(0, self.m_canvas_np.shape[1] - img.shape[1], 20):
-                    if np.any(self.m_canvas_np[y:y + img.shape[0], x:x + img.shape[1]][img > 0] != 8):
+                    if np.any(self.m_canvas_np[y:y + img.shape[0], x:x + img.shape[1]][img > 0] != 9):
                         continue
                     coords.append((y, x))
             if len(coords):
