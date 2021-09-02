@@ -1,1 +1,130 @@
-{"patient": 4, "body_parts": {"0_torso_244_207_94_94.png": {"id": 0, "wounds": {"bruise.png": {"coords": [80, 180, 214, 250], "rotation": 66, "scale": 1.0}, "scar.png": {"coords": [220, 420, 75, 67], "rotation": 131, "scale": 0.7890953641644651}, "small.png": {"coords": [260, 380, 57, 53], "rotation": 48, "scale": 1.0}}}, "4_leg_505_247_94_94.png": {"id": 4, "wounds": {"scalpel.png": {"coords": [280, 320, 8, 90], "rotation": 357, "scale": 1.0}}}, "1_arm_229_282_94_94.png": {"id": 1, "wounds": {"swollen.png": {"coords": [180, 140, 143, 143], "rotation": 84, "scale": 1.0}, "small.png": {"coords": [260, 280, 25, 59], "rotation": 354, "scale": 1.0}}}, "2_knee_434_172_94_94.png": {"id": 2, "wounds": {"bruise.png": {"coords": [160, 160, 252, 222], "rotation": 207, "scale": 1.0}, "scar.png": {"coords": [120, 460, 47, 57], "rotation": 218, "scale": 0.5801251993396702}}}, "3_shoulder_121_140_94_94.png": {"id": 3, "wounds": {"infected.png": {"coords": [220, 380, 88, 80], "rotation": 131, "scale": 0.8417038495727479}, "scalpel.png": {"coords": [300, 160, 92, 6], "rotation": 92, "scale": 1.0}}}}}
+{
+  "patient": 4,
+  "body_parts": {
+    "0_torso_244_207_94_94.png": {
+      "id": 0,
+      "wounds": {
+        "bruise.png": {
+          "coords": [
+            80,
+            180,
+            214,
+            250
+          ],
+          "rotation": 66,
+          "scale": 1.0
+        },
+        "scar.png": {
+          "coords": [
+            220,
+            420,
+            75,
+            67
+          ],
+          "rotation": 131,
+          "scale": 0.7890953641644651
+        },
+        "small.png": {
+          "coords": [
+            260,
+            380,
+            57,
+            53
+          ],
+          "rotation": 48,
+          "scale": 1.0
+        }
+      }
+    },
+    "4_leg_505_247_94_94.png": {
+      "id": 4,
+      "wounds": {
+        "scalpel.png": {
+          "coords": [
+            280,
+            320,
+            8,
+            90
+          ],
+          "rotation": 357,
+          "scale": 1.0
+        }
+      }
+    },
+    "1_arm_229_282_94_94.png": {
+      "id": 1,
+      "wounds": {
+        "swollen.png": {
+          "coords": [
+            180,
+            140,
+            143,
+            143
+          ],
+          "rotation": 84,
+          "scale": 1.0
+        },
+        "small.png": {
+          "coords": [
+            260,
+            280,
+            25,
+            59
+          ],
+          "rotation": 354,
+          "scale": 1.0
+        }
+      }
+    },
+    "2_knee_434_172_94_94.png": {
+      "id": 2,
+      "wounds": {
+        "bruise.png": {
+          "coords": [
+            160,
+            160,
+            252,
+            222
+          ],
+          "rotation": 207,
+          "scale": 1.0
+        },
+        "scar.png": {
+          "coords": [
+            120,
+            460,
+            47,
+            57
+          ],
+          "rotation": 218,
+          "scale": 0.5801251993396702
+        }
+      }
+    },
+    "3_shoulder_121_140_94_94.png": {
+      "id": 3,
+      "wounds": {
+        "infected.png": {
+          "coords": [
+            220,
+            380,
+            88,
+            80
+          ],
+          "rotation": 131,
+          "scale": 0.8417038495727479
+        },
+        "scalpel.png": {
+          "coords": [
+            300,
+            160,
+            92,
+            6
+          ],
+          "rotation": 92,
+          "scale": 1.0
+        }
+      }
+    }
+  }
+}
