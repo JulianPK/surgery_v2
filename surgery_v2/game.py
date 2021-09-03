@@ -38,14 +38,22 @@ class Game:
         self.tk_root.mainloop()
 
     def continue_wound(self, event):
-        print(self.body_part.wound_files)
-        ret = self.body_part.advance_wound(0)
-        if ret:
-            self.img_tk = ImageTk.PhotoImage(self.level.p.render())
-            self.tk_canvas.create_image(self.img_tk.width() // 2, self.img_tk.height() // 2, image=self.img_tk)
-            self.tk_canvas.update()
-            self.tk_canvas.bind("<Button-1>", self._on_body_click)
-            return
+        mask = self.body_part.canvas_mask_to_ndarray()
+        # self.body_part.ndarray_mask_to_rgb(mask).show()
+        name = wound_idx_2_str(np.argmax(mask[event.y, event.x]))
+        if name:
+            print(f"Clicked on wound {name} - advancing wound.")
+            for i, data in enumerate(self.body_part.wound_data):
+                bbox = data["coords"]
+                if (bbox[0] <= event.y <= (bbox[0] + bbox[2])) and (bbox[1] <= event.x <= (bbox[1] + bbox[3])):
+                    break
+            ret = self.body_part.advance_wound(i)
+            if ret:
+                self.img_tk = ImageTk.PhotoImage(self.level.p.render())
+                self.tk_canvas.create_image(self.img_tk.width() // 2, self.img_tk.height() // 2, image=self.img_tk)
+                self.tk_canvas.update()
+                self.tk_canvas.bind("<Button-1>", self._on_body_click)
+                return
         self.img_tk = ImageTk.PhotoImage(self.body_part.render())
         self.tk_canvas.create_image(self.img_tk.width() // 2, self.img_tk.height() // 2, image=self.img_tk)
         self.tk_canvas.update()
@@ -64,7 +72,7 @@ class Game:
         if not inbbox:
             return
 
-        self.tk_canvas.bind("<Button-1>", self._on_body_part_click)
+        self.tk_canvas.bind("<Button-1>", self.continue_wound)
         self.img_tk = ImageTk.PhotoImage(self.level.p.body_parts[i].render())
         self.body_part = self.level.p.body_parts[i]
         self.tk_canvas.create_image(self.img_tk.width() // 2, self.img_tk.height() // 2, image=self.img_tk)
@@ -77,8 +85,12 @@ class Game:
         name = wound_idx_2_str(np.argmax(mask[event.y, event.x]))
         if name:
             print(f"Clicked on wound {name} - advancing wound.")
-            for i, bbox in enumerate(self.level.p.bbox):
+            for i, data in enumerate(self.body_part.wound_data):
+                bbox = data["coords"]
                 if (bbox[0] <= event.x <= (bbox[0] + bbox[2])) and (bbox[1] <= event.y <= (bbox[1] + bbox[3])):
                     break
-            self.body_part.advance_wound(i)
+            ret = self.body_part.advance_wound(i)
+            self.img_tk = ImageTk.PhotoImage(self.body_part.render())
+            self.tk_canvas.create_image(self.img_tk.width() // 2, self.img_tk.height() // 2, image=self.img_tk)
+            self.tk_canvas.update()
 

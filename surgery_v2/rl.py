@@ -52,7 +52,8 @@ class OperatingRoom(rlpyt.envs.base.Env):
         name = wound_idx_2_str(np.argmax(mask[event.y, event.x]))
         if name:
             print(f"Clicked on wound {name} - advancing wound.")
-            for i, bbox in enumerate(self.level.bbox):
+            for i, data in enumerate(self.body_part.wound_data):
+                bbox = data["coords"]
                 if (bbox[0] <= event.x <= (bbox[0] + bbox[2])) and (bbox[1] <= event.y <= (bbox[1] + bbox[3])):
                     break
             self.body_part.advance_wound(i)
@@ -92,6 +93,7 @@ def main():
     steps = torch.rand([10000, 2])
     for step in steps:
         ret = op.step(step)
+
         ...
 
 

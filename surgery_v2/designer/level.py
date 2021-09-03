@@ -284,7 +284,31 @@ class BodyPart:
                     img.height, img.width]
         self.wound_files[idx] = next_wound
         self.wound_data[idx]["coords"] = new_bbox
+        self._update_canvas_np()
         return False
+
+    def _update_canvas_np(self):
+        m_canvas = Image.new('L', (702, 510), color=10)  # Is Outside of the canvas
+        drawer = ImageDraw.Draw(m_canvas)
+        drawer.polygon(self.polygons[self.idx], fill=9)  # Is skin and inside of canvas
+        self.m_canvas_np = np.array(m_canvas)
+        for f_wound, wd in zip(self.wound_files, self.wound_data):
+            w_img = Image.open(f_wound)
+            coords, rotation, scale = wd["coords"], wd["rotation"], wd["scale"]
+            if os.path.split(f_wound)[1] in ["big.png", "infected.png"]:
+                # Scale is allowed
+                img = w_img.copy().resize((int(w_img.width * scale), int(w_img.height * scale)))
+            elif os.path.split(f_wound)[1] in ["scar.png", "stitched.png"]:
+                img = w_img.copy().resize((int(w_img.width * scale), int(w_img.height)))
+            else:
+                img = w_img.copy()
+            img = img.rotate(rotation, expand=True)
+            img = np.array(img.split()[-1])
+            THRESH = 50
+            img[img < THRESH] = 0
+            img[img >= THRESH] = 1
+            self.m_canvas_np[coords[0]:coords[0] + coords[2], coords[1]:coords[1] + coords[3]] \
+                [img > 0] = wound_str_2_idx(os.path.split(f_wound)[1].split(".")[0])
 
     def _find_places_for_wound(self, f_wound):
         w_img = Image.open(f_wound)
